@@ -2,7 +2,7 @@
   <section class="card">
     <div>
       <h4>SEARCH</h4>
-      <input type="text" name="filter" id="filter-text" />
+      <input type="text" name="filter" id="filter" />
     </div>
     <div>
       <h4>SORT BY</h4>
@@ -26,7 +26,7 @@ export default {};
 .card {
   width: 50%;
   max-width: 400px;
-  background-color: rgb(131, 139, 255);
+  background-color: lightblue;
   border-radius: 1.5rem;
   padding: 1.5rem;
   margin: 1rem auto;

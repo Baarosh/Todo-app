@@ -60,6 +60,8 @@ body {
   font-size: 16px;
   box-sizing: border-box;
   font-family: 'Bangers', cursive;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #app {

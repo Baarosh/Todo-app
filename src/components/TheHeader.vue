@@ -8,7 +8,7 @@
 header {
   height: 100px;
   width: 100%;
-  background-color: blueviolet;
+  background-color: purple;
   display: flex;
   justify-content: center;
   align-items: center;
