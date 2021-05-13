@@ -1,6 +1,6 @@
 <template>
   <the-options></the-options>
-  <the-list :todos="todos" @switch="changeStatus"></the-list>
+  <the-list :todos="todos" @delete="deleteTodo" @switch="changeStatus"></the-list>
 </template>
 
 <script>
@@ -8,30 +8,18 @@ import TheList from '@/components/TheList.vue';
 import TheOptions from '@/components/TheOptions.vue';
 
 export default {
+  emits: ['switch', 'delete'],
   components: {
     TheOptions,
     TheList,
   },
-  data() {
-    return {
-      todos: [
-        {
-          id: 1,
-          title: 'Cook a dinner',
-          completed: false,
-        },
-        {
-          id: 2,
-          title: 'Go to work',
-          completed: false,
-        },
-      ],
-    };
-  },
+  inject: ['todos'],
   methods: {
     changeStatus(todo) {
-      const foundTodo = this.todos.find((t) => t.id === todo.id);
-      foundTodo.completed = !foundTodo.completed;
+      this.$emit('switch', todo);
+    },
+    deleteTodo(todo) {
+      this.$emit('delete', todo);
     },
   },
 };

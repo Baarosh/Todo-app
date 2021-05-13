@@ -13,10 +13,13 @@
 <script>
 export default {
   props: ['todos'],
-  emits: ['switch'],
+  emits: ['switch', 'delete'],
   methods: {
     switchStatus(todo) {
       this.$emit('switch', todo);
+    },
+    deleteTodo(todo) {
+      this.$emit('delete', todo);
     },
   },
 };
