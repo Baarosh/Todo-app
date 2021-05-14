@@ -27,11 +27,24 @@ export default {
 
 <style scoped>
 .card {
-  width: 50%;
-  max-width: 400px;
-  background-color: rgb(131, 139, 255);
-  border-radius: 1.5rem;
-  padding: 1.5rem;
-  margin: 1rem auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  padding: 1rem;
+  margin: 2rem auto;
+  max-width: 50rem;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo-delete {
+  padding: 0.75rem 1.5rem;
+  font-family: inherit;
+  background-color: #3a0061;
+  border: 1px solid #3a0061;
+  color: white;
+  cursor: pointer;
+  margin: 0rem 1rem;
 }
 </style>

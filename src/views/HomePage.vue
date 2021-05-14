@@ -1,5 +1,5 @@
 <template>
-  <the-options></the-options>
+  <the-options @sortchange="sortChange"></the-options>
   <the-list :todos="todos" @delete="deleteTodo" @switch="changeStatus"></the-list>
 </template>
 
@@ -8,7 +8,7 @@ import TheList from '@/components/TheList.vue';
 import TheOptions from '@/components/TheOptions.vue';
 
 export default {
-  emits: ['switch', 'delete'],
+  emits: ['switch', 'delete', 'sortchange'],
   components: {
     TheOptions,
     TheList,
@@ -20,6 +20,9 @@ export default {
     },
     deleteTodo(todo) {
       this.$emit('delete', todo);
+    },
+    sortChange(option) {
+      this.$emit('sortchange', option);
     },
   },
 };

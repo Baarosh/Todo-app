@@ -1,0 +1,167 @@
+1
+1
+
+00:00:02,080  -->  00:00:03,730
+<v Maximilian>Now, there's one last feature</v>
+2
+
+2
+
+00:00:03,730  -->  00:00:06,040
+which we can implement here real quick
+3
+
+3
+
+00:00:06,040  -->  00:00:08,440
+and that's related to the base dialogue.
+4
+
+4
+
+00:00:08,440  -->  00:00:10,970
+It works like this, but at the moment,
+5
+
+5
+
+00:00:10,970  -->  00:00:13,110
+if we see that dialogue,
+6
+
+6
+
+00:00:13,110  -->  00:00:16,630
+it is added deeply nested into our DOM.
+7
+
+7
+
+00:00:16,630  -->  00:00:19,270
+It's somewhere nested in some divs
+8
+
+8
+
+00:00:19,270  -->  00:00:22,340
+and whilst that works, we did learn about
+9
+
+9
+
+00:00:22,340  -->  00:00:26,510
+a nice feature that can help us move it in the DOM,
+10
+
+10
+
+00:00:26,510  -->  00:00:28,590
+and that's the teleport feature.
+11
+
+11
+
+00:00:28,590  -->  00:00:31,360
+So here in the BaseDialouge.vue file,
+12
+
+12
+
+00:00:31,360  -->  00:00:35,683
+I will add the teleport component, which is built into Vue,
+13
+
+13
+
+00:00:36,750  -->  00:00:38,750
+and that will wrap both the dialogue
+14
+
+14
+
+00:00:38,750  -->  00:00:42,970
+as well as the backdrop with this teleport component.
+15
+
+15
+
+00:00:42,970  -->  00:00:44,860
+So here's the closing tag
+16
+
+16
+
+00:00:44,860  -->  00:00:48,690
+and now, teleport needs one prop, the to prop,
+17
+
+17
+
+00:00:48,690  -->  00:00:52,290
+where are we add a CSS selector telling Vue
+18
+
+18
+
+00:00:52,290  -->  00:00:56,630
+where this content should be moved to in the real DOM,
+19
+
+19
+
+00:00:56,630  -->  00:01:00,163
+and I will move it directly to the body tag like this.
+20
+
+20
+
+00:01:02,010  -->  00:01:05,090
+And if we do that, everything works like before.
+21
+
+21
+
+00:01:05,090  -->  00:01:08,240
+It looks like before, but if we inspect this,
+22
+
+22
+
+00:01:08,240  -->  00:01:11,120
+we can actually see that now this dialogue
+23
+
+23
+
+00:01:11,120  -->  00:01:14,160
+and the div for the backdrop is added here
+24
+
+24
+
+00:01:14,160  -->  00:01:17,140
+at the end of our body section.
+25
+
+25
+
+00:01:17,140  -->  00:01:19,910
+And that's just a tiny thing, not a must have,
+26
+
+26
+
+00:01:19,910  -->  00:01:21,980
+but since we learned about teleport
+27
+
+27
+
+00:01:21,980  -->  00:01:25,050
+and since it helps us with our HTML structure,
+28
+
+28
+
+00:01:25,050  -->  00:01:26,753
+why wouldn't we implement it?
