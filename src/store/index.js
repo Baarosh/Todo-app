@@ -1,9 +1,61 @@
 import { createStore } from 'vuex';
 
 export default createStore({
-  state: {},
-  mutations: {},
-  actions: {},
-  getters: {},
+  state() {
+    return {
+      listOfTodos: [
+        { id: 1, title: 'Cook a dinner', completed: false },
+        { id: 2, title: 'Running', completed: false },
+        { id: 3, title: 'Go to work', completed: false },
+        { id: 4, title: 'Shopping', completed: false }
+      ],
+      sortBy: 'id',
+      filterBy: ''
+    };
+  },
+  mutations: {
+    changeSorting(state, payload) {
+      state.sortBy = payload;
+
+      if (state.sortBy === 'id') {
+        state.listOfTodos = state.listOfTodos.sort((a, b) => {
+          if (a.id < b.id) return -1;
+          if (a.id > b.id) return 1;
+          return 0;
+        });
+        console.log('id');
+      } else {
+        state.listOfTodos = state.listOfTodos.sort((a, b) => {
+          if (a.title < b.title) return -1;
+          if (a.title > b.title) return 1;
+          return 0;
+        });
+        console.log('alpha');
+      }
+    },
+    setFilter(state, payload) {
+      state.filterBy = payload;
+      console.log(state.filterBy);
+    }
+  },
+  actions: {
+    changeSorting(context, payload) {
+      context.commit('changeSorting', payload);
+    },
+    setFilter(context, payload) {
+      context.commit('setFilter', payload);
+    }
+  },
+  getters: {
+    listOfTodos(state) {
+      return state.listOfTodos;
+    },
+    sortBy(state) {
+      return state.sortBy;
+    },
+    filterBy(state) {
+      return state.filterBy;
+    }
+  },
   modules: {}
 });

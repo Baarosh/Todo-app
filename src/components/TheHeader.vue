@@ -16,10 +16,10 @@ export default {};
   background-color: lightsalmon;
   align-items: center;
   justify-content: center;
-}
 
-.header h1 {
-  font-size: 2.5rem;
-  color: white;
+  h1 {
+    font-size: 2.5rem;
+    color: white;
+  }
 }
 </style>
