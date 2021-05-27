@@ -23,19 +23,23 @@ export default createStore({
           if (a.id > b.id) return 1;
           return 0;
         });
-        console.log('id');
       } else {
         state.listOfTodos = state.listOfTodos.sort((a, b) => {
           if (a.title < b.title) return -1;
           if (a.title > b.title) return 1;
           return 0;
         });
-        console.log('alpha');
       }
     },
     setFilter(state, payload) {
       state.filterBy = payload;
-      console.log(state.filterBy);
+    },
+    changeCompletion(state, payload) {
+      const todo = state.listOfTodos.find(t => t.id === payload);
+      todo.completed = !todo.completed;
+    },
+    deleteTodo(state, payload) {
+      state.listOfTodos = state.listOfTodos.filter(todo => todo.id !== payload);
     }
   },
   actions: {
@@ -44,11 +48,23 @@ export default createStore({
     },
     setFilter(context, payload) {
       context.commit('setFilter', payload);
+    },
+    changeCompletion(context, payload) {
+      context.commit('changeCompletion', payload);
+    },
+    deleteTodo(context, payload) {
+      context.commit('deleteTodo', payload);
     }
   },
   getters: {
-    listOfTodos(state) {
-      return state.listOfTodos;
+    listOfTodos(state, getters) {
+      const todoList = state.listOfTodos;
+      if (todoList.length > 0) {
+        return state.listOfTodos.filter(todo =>
+          todo.title.toLowerCase().includes(getters.filterBy)
+        );
+      }
+      return todoList;
     },
     sortBy(state) {
       return state.sortBy;
