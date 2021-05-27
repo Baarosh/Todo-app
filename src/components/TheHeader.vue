@@ -1,20 +1,25 @@
 <template>
-  <header>
-    <h1>Todo List</h1>
-  </header>
+  <div class="header">
+    <h1>TODO LIST</h1>
+  </div>
 </template>
 
-<style scoped>
-header {
-  height: 100px;
+<script>
+export default {};
+</script>
+
+<style lang="scss" scoped>
+.header {
+  height: 80px;
   width: 100%;
-  background-color: purple;
   display: flex;
-  justify-content: center;
+  background-color: lightsalmon;
   align-items: center;
+  justify-content: center;
 }
-h1 {
-  color: white;
+
+.header h1 {
   font-size: 2.5rem;
+  color: white;
 }
 </style>

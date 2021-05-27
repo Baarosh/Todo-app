@@ -1,27 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import NewTodo from '@/views/NewTodo.vue';
-import HomePage from '@/views/HomePage.vue';
+import MainPage from '../views/MainPage.vue';
 
 const routes = [
-  {
-    path: '/home',
-    name: 'HomePage',
-    component: HomePage,
-  },
-  {
-    path: '/newtodo',
-    name: 'NewTodo',
-    component: NewTodo,
-  },
-  {
-    path: '/:notFound(.*)',
-    redirect: '/home',
-  },
+  { path: '/', component: MainPage, name: 'MainPage' },
+  { path: '/:invalid(.*)*', redirect: { name: 'MainPage' } }
 ];
 
-const router = createRouter({
+export default createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes,
+  routes
 });
-
-export default router;
