@@ -7,14 +7,14 @@ export default createStore({
         { id: 1, title: 'Cook a dinner', completed: false },
         { id: 2, title: 'Running', completed: false },
         { id: 3, title: 'Go to work', completed: false },
-        { id: 4, title: 'Shopping', completed: false }
+        { id: 4, title: 'Shopping', completed: false },
       ],
-      sortBy: 'id',
-      filterBy: ''
+      sortBy: 'alpha',
+      filterBy: '',
     };
   },
   mutations: {
-    changeSorting(state, payload) {
+    setSorting(state, payload) {
       state.sortBy = payload;
 
       if (state.sortBy === 'id') {
@@ -34,44 +34,44 @@ export default createStore({
     setFilter(state, payload) {
       state.filterBy = payload;
     },
-    changeCompletion(state, payload) {
-      const todo = state.listOfTodos.find(t => t.id === payload);
+    setCompletion(state, payload) {
+      const todo = state.listOfTodos.find((t) => t.id === payload);
       todo.completed = !todo.completed;
     },
     deleteTodo(state, payload) {
-      state.listOfTodos = state.listOfTodos.filter(todo => todo.id !== payload);
-    }
+      state.listOfTodos = state.listOfTodos.filter((todo) => todo.id !== payload);
+    },
   },
   actions: {
-    changeSorting(context, payload) {
-      context.commit('changeSorting', payload);
+    setSorting(context, payload) {
+      context.commit('setSorting', payload);
     },
     setFilter(context, payload) {
       context.commit('setFilter', payload);
     },
-    changeCompletion(context, payload) {
-      context.commit('changeCompletion', payload);
+    setCompletion(context, payload) {
+      context.commit('setCompletion', payload);
     },
     deleteTodo(context, payload) {
       context.commit('deleteTodo', payload);
-    }
+    },
   },
   getters: {
     listOfTodos(state, getters) {
       const todoList = state.listOfTodos;
       if (todoList.length > 0) {
-        return state.listOfTodos.filter(todo =>
-          todo.title.toLowerCase().includes(getters.filterBy)
+        return state.listOfTodos.filter((todo) =>
+          todo.title.toLowerCase().includes(getters.getFilter)
         );
       }
       return todoList;
     },
-    sortBy(state) {
+    getSorting(state) {
       return state.sortBy;
     },
-    filterBy(state) {
+    getFilter(state) {
       return state.filterBy;
-    }
+    },
   },
-  modules: {}
+  modules: {},
 });

@@ -1,19 +1,17 @@
 <template>
   <div class="container container1">
-    <input type="text" name="search" id="search" @input="setFilter" />
-    <select name="sort" id="sort" @change="changeSorting">
+    <input type="text" name="search" id="search" @input="setFilter" v-model="filterBy" />
+    <select name="sort" id="sort" @change="setSorting" v-model="selectedOption">
       <option value="alpha">Alphabeticaly</option>
-      <option value="id" selected>By Id</option>
+      <option value="id">By Id</option>
     </select>
-    <button id="new" type="button">Add new todo</button>
+    <button id="new" @click="pushToAddTodo">Add new todo</button>
   </div>
   <div class="container container2">
-    <ul v-if="getListOfTodos.length > 0">
-      <li v-for="todo in getListOfTodos" :key="todo.id">
+    <ul v-if="getTodos.length > 0">
+      <li v-for="todo in getTodos" :key="todo.id">
         <p>{{ todo.id }} - {{ todo.title }} - {{ todo.completed }}</p>
-        <button id="complete" type="button" @click="changeCompletion(todo.id)">
-          Complete
-        </button>
+        <button id="complete" type="button" @click="setCompletion(todo.id)">Complete</button>
         <button id="delete" type="button" @click="deleteTodo(todo.id)">Delete</button>
       </li>
     </ul>
@@ -24,28 +22,50 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      filterBy: '',
+      selectedOption: '',
+    };
+  },
+  watch: {
+    $route() {
+      this.setFilter();
+      this.$store.dispatch('setSorting', this.selectedOption);
+    },
   },
   computed: {
-    getListOfTodos() {
+    getTodos() {
       return this.$store.getters.listOfTodos;
-    }
+    },
+    getSorting() {
+      return this.$store.getters.getSorting;
+    },
+  },
+  mounted() {
+    this.$store.dispatch('setSorting', 'alpha');
+    this.selectedOption = 'alpha';
   },
   methods: {
-    changeSorting(event) {
+    setSorting(event) {
       const { value } = event.target;
-      this.$store.dispatch('changeSorting', value);
+      this.selectedOption = value;
+      console.log(value);
+      this.$store.dispatch('setSorting', value);
     },
-    changeCompletion(id) {
-      this.$store.dispatch('changeCompletion', id);
+    setCompletion(id) {
+      this.$store.dispatch('setCompletion', id);
     },
     deleteTodo(id) {
       this.$store.dispatch('deleteTodo', id);
     },
-    setFilter(event) {
-      this.$store.dispatch('setFilter', event.target.value);
-    }
-  }
+    setFilter() {
+      this.$store.dispatch('setFilter', this.filterBy);
+    },
+    pushToAddTodo() {
+      this.filterBy = '';
+      this.$router.push('/addtodo');
+    },
+  },
 };
 </script>
 
