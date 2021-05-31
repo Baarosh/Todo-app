@@ -25,10 +25,13 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   width: 100%;
   height: 100%;
-  box-sizing: border-box;
   font-size: 16px;
   font-family: 'Questrial', sans-serif;
   font-weight: light;

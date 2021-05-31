@@ -14,14 +14,15 @@ const generator = generatorCreator();
 export default createStore({
   state() {
     return {
-      listOfTodos: [
-        { id: 1, title: 'Cook a dinner', completed: false },
-        { id: 2, title: 'Running', completed: false },
-        { id: 3, title: 'Go to work', completed: false },
-        { id: 4, title: 'Shopping', completed: false },
+      todoList: [
+        { id: 1, title: 'Cook a dinner', category: 'Home', completed: false },
+        { id: 2, title: 'Running', category: 'Home', completed: false },
+        { id: 3, title: 'Go to work', category: 'Work', completed: false },
+        { id: 4, title: 'Shopping', category: 'Home', completed: false },
       ],
       sortBy: 'alpha',
       filterBy: '',
+      activeCategory: 'Home',
     };
   },
   mutations: {
@@ -29,13 +30,13 @@ export default createStore({
       state.sortBy = payload;
 
       if (state.sortBy === 'id') {
-        state.listOfTodos = state.listOfTodos.sort((a, b) => {
+        state.todoList = state.todoList.sort((a, b) => {
           if (a.id < b.id) return -1;
           if (a.id > b.id) return 1;
           return 0;
         });
       } else {
-        state.listOfTodos = state.listOfTodos.sort((a, b) => {
+        state.todoList = state.todoList.sort((a, b) => {
           if (a.title < b.title) return -1;
           if (a.title > b.title) return 1;
           return 0;
@@ -46,18 +47,22 @@ export default createStore({
       state.filterBy = payload;
     },
     setCompletion(state, payload) {
-      const todo = state.listOfTodos.find((t) => t.id === payload);
+      const todo = state.todoList.find((t) => t.id === payload);
       todo.completed = !todo.completed;
     },
     deleteTodo(state, payload) {
-      state.listOfTodos = state.listOfTodos.filter((todo) => todo.id !== payload);
+      state.todoList = state.todoList.filter((todo) => todo.id !== payload);
     },
     addNewTodo(state, payload) {
-      state.listOfTodos.push({
+      state.todoList.push({
         id: generator.next().value,
-        title: payload,
+        title: payload.title,
+        category: payload.category,
         completed: false,
       });
+    },
+    setActiveCategory(state, payload) {
+      state.activeCategory = payload;
     },
   },
   actions: {
@@ -76,22 +81,50 @@ export default createStore({
     addNewTodo(context, payload) {
       context.commit('addNewTodo', payload);
     },
+    setActiveCategory(context, payload) {
+      context.commit('setActiveCategory', payload);
+    },
   },
   getters: {
-    getListOfTodos(state, getters) {
-      const todoList = state.listOfTodos;
-      if (todoList.length > 0) {
-        return state.listOfTodos.filter((todo) =>
-          todo.title.toLowerCase().includes(getters.getFilter)
+    displayTodoList(state, getters) {
+      const theList = state.todoList;
+
+      if (theList.length > 0) {
+        return state.todoList.filter(
+          (todo) =>
+            todo.title.toLowerCase().includes(getters.getFilter) &&
+            todo.category === getters.getActiveCategory
         );
       }
-      return todoList;
+      return theList;
+    },
+    getTodoList(state) {
+      return state.todoList;
     },
     getSorting(state) {
       return state.sortBy;
     },
     getFilter(state) {
       return state.filterBy;
+    },
+    getActiveCategory(state) {
+      return state.activeCategory;
+    },
+    getNumberOfActiveCategories(_, getters) {
+      const counter = {
+        home: 0,
+        work: 0,
+        other: 0,
+      };
+      const todoList = getters.getTodoList;
+
+      todoList.forEach((todo) => {
+        if (todo.category === 'Home') counter.home += 1;
+        else if (todo.category === 'Work') counter.work += 1;
+        else counter.other += 1;
+      });
+
+      return counter;
     },
   },
   modules: {},

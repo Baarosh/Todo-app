@@ -5,17 +5,17 @@
     </div>
     <div class="navigation-content">
       <ul>
-        <li>
-          <p class="number-of-task">5</p>
+        <li @click="setActiveCategory('Home')">
+          <p class="number-of-task">{{ getNumberOfActiveCategories.home }}</p>
           <p class="project-title">Home</p>
         </li>
-        <li>
-          <p class="number-of-task">3</p>
+        <li @click="setActiveCategory('Work')">
+          <p class="number-of-task">{{ getNumberOfActiveCategories.work }}</p>
           <p class="project-title">Work</p>
         </li>
-        <li>
-          <p class="number-of-task">1</p>
-          <p class="project-title">Others</p>
+        <li @click="setActiveCategory('Other')">
+          <p class="number-of-task">{{ getNumberOfActiveCategories.other }}</p>
+          <p class="project-title">Other</p>
         </li>
       </ul>
     </div>
@@ -23,7 +23,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    setActiveCategory(category) {
+      this.$store.dispatch('setActiveCategory', category);
+    },
+  },
+  computed: {
+    getNumberOfActiveCategories() {
+      return this.$store.getters.getNumberOfActiveCategories;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

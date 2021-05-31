@@ -1,22 +1,37 @@
 <template>
   <div class="main-wrapper">
-    <div class="container container1">
-      <input type="text" name="search" id="search" @input="setFilter" v-model="filterBy" />
-      <select name="sort" id="sort" @change="setSorting" v-model="selectedOption">
+    <div class="list-header">
+      <h3 class="active-project">{{ getActiveCategory }}</h3>
+      <input
+        type="text"
+        name="search-input"
+        id="search-input"
+        @input="setFilter"
+        v-model="filterBy"
+      />
+      <select name="sort-input" id="sort-input" @change="setSorting" v-model="selectedOption">
         <option value="alpha">Alphabeticaly</option>
         <option value="id">By Id</option>
       </select>
-      <button id="new" @click="pushToAddTodo">Add new todo</button>
     </div>
-    <div class="container container2">
-      <ul v-if="getListOfTodos.length > 0">
-        <li v-for="todo in getListOfTodos" :key="todo.id">
-          <p>{{ todo.id }} - {{ todo.title }} - {{ todo.completed }}</p>
-          <button id="complete" type="button" @click="setCompletion(todo.id)">Complete</button>
-          <button id="delete" type="button" @click="deleteTodo(todo.id)">Delete</button>
+    <div class="list-content">
+      <ul v-if="displayTodoList.length > 0">
+        <li v-for="todo in displayTodoList" :key="todo.id">
+          <p :class="{ checked: !todo.completed }">
+            {{ todo.id }} - {{ todo.title }} - {{ todo.completed }}
+          </p>
+          <button id="complete-button" type="button" @click="setCompletion(todo.id)">
+            Complete
+          </button>
+          <button id="delete-button" type="button" @click="deleteTodo(todo.id)">Delete</button>
         </li>
       </ul>
-      <p v-else>No todos on the list</p>
+      <ul v-else>
+        <li>
+          <p>No todos on the list</p>
+        </li>
+      </ul>
+      <button id="new-todo-button" @click="pushToAddTodo">Add Task</button>
     </div>
   </div>
 </template>
@@ -36,11 +51,17 @@ export default {
     },
   },
   computed: {
-    getListOfTodos() {
-      return this.$store.getters.getListOfTodos;
+    displayTodoList() {
+      return this.$store.getters.displayTodoList;
     },
     getSorting() {
       return this.$store.getters.getSorting;
+    },
+    getActiveCategory() {
+      return this.$store.getters.getActiveCategory;
+    },
+    getTodoList() {
+      return this.$store.getters.getTodoList;
     },
   },
   mounted() {
@@ -51,7 +72,6 @@ export default {
     setSorting(event) {
       const { value } = event.target;
       this.selectedOption = value;
-      console.log(value);
       this.$store.dispatch('setSorting', value);
     },
     setCompletion(id) {
@@ -76,34 +96,59 @@ export default {
   flex: 4;
   background-color: lightblue;
 }
-.container {
+
+.list-header {
   width: 50%;
   margin: 20px auto;
   background-color: plum;
-  border: 1px solid gray;
   border-radius: 10px;
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: row nowrap;
   align-items: center;
   justify-content: space-evenly;
+  padding: 10px;
+  h3 {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.list-content {
+  width: 50%;
+  margin: 20px auto;
+  background-color: plum;
+  border-radius: 10px;
 
   ul {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    justify-content: center;
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0 10px;
+    li {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 3fr 1fr 1fr;
 
-    p {
-      display: inline-block;
+      button {
+        padding: 0px;
+        width: 100px;
+        height: auto;
+        border: none;
+        background-color: lightgreen;
+        border-radius: 5px;
+        &:hover {
+          background-color: green;
+          cursor: pointer;
+        }
+      }
     }
   }
 }
 
-.container1 {
-  height: 200px;
-}
-
-.container2 {
-  height: auto;
-  min-height: 50px;
+.checked {
+  text-decoration: line-through;
 }
 </style>

@@ -2,7 +2,7 @@
   <div class="header-wrapper">
     <div class="container-left" @click="pushToMain">
       <font-awesome-icon :icon="['fas', 'book']" size="2x" color="rgb(139, 79, 55)" />
-      <h1>Your To-Do's..</h1>
+      <h1>Your Task Manager</h1>
     </div>
     <div class="container-right">
       <h2>Sign out</h2>
@@ -32,7 +32,7 @@ export default {
   .container-left {
     margin-left: 15px;
     height: 100%;
-    width: 250px;
+    width: 320px;
     display: flex;
     align-items: center;
     justify-content: space-around;
