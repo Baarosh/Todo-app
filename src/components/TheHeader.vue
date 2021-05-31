@@ -1,14 +1,14 @@
 <template>
   <div class="header">
-    <h1 @click="routeToMain">TODO LIST</h1>
+    <h1 @click="pushToMain">TODO LIST</h1>
   </div>
 </template>
 
 <script>
 export default {
   methods: {
-    routeToMain() {
-      this.$router.push('/');
+    pushToMain() {
+      this.$router.push({ name: 'main-page' });
     },
   },
 };

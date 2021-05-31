@@ -1,5 +1,16 @@
 import { createStore } from 'vuex';
 
+function* generatorCreator() {
+  let index = 5;
+
+  while (true) {
+    // eslint-disable-next-line no-plusplus
+    yield index++;
+  }
+}
+
+const generator = generatorCreator();
+
 export default createStore({
   state() {
     return {
@@ -41,6 +52,13 @@ export default createStore({
     deleteTodo(state, payload) {
       state.listOfTodos = state.listOfTodos.filter((todo) => todo.id !== payload);
     },
+    addNewTodo(state, payload) {
+      state.listOfTodos.push({
+        id: generator.next().value,
+        title: payload,
+        completed: false,
+      });
+    },
   },
   actions: {
     setSorting(context, payload) {
@@ -55,9 +73,12 @@ export default createStore({
     deleteTodo(context, payload) {
       context.commit('deleteTodo', payload);
     },
+    addNewTodo(context, payload) {
+      context.commit('addNewTodo', payload);
+    },
   },
   getters: {
-    listOfTodos(state, getters) {
+    getListOfTodos(state, getters) {
       const todoList = state.listOfTodos;
       if (todoList.length > 0) {
         return state.listOfTodos.filter((todo) =>

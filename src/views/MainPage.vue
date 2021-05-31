@@ -8,8 +8,8 @@
     <button id="new" @click="pushToAddTodo">Add new todo</button>
   </div>
   <div class="container container2">
-    <ul v-if="getTodos.length > 0">
-      <li v-for="todo in getTodos" :key="todo.id">
+    <ul v-if="getListOfTodos.length > 0">
+      <li v-for="todo in getListOfTodos" :key="todo.id">
         <p>{{ todo.id }} - {{ todo.title }} - {{ todo.completed }}</p>
         <button id="complete" type="button" @click="setCompletion(todo.id)">Complete</button>
         <button id="delete" type="button" @click="deleteTodo(todo.id)">Delete</button>
@@ -34,8 +34,8 @@ export default {
     },
   },
   computed: {
-    getTodos() {
-      return this.$store.getters.listOfTodos;
+    getListOfTodos() {
+      return this.$store.getters.getListOfTodos;
     },
     getSorting() {
       return this.$store.getters.getSorting;
@@ -63,7 +63,7 @@ export default {
     },
     pushToAddTodo() {
       this.filterBy = '';
-      this.$router.push('/addtodo');
+      this.$router.push({ name: 'add-todo' });
     },
   },
 };
