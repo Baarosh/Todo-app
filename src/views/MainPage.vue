@@ -1,21 +1,23 @@
 <template>
-  <div class="container container1">
-    <input type="text" name="search" id="search" @input="setFilter" v-model="filterBy" />
-    <select name="sort" id="sort" @change="setSorting" v-model="selectedOption">
-      <option value="alpha">Alphabeticaly</option>
-      <option value="id">By Id</option>
-    </select>
-    <button id="new" @click="pushToAddTodo">Add new todo</button>
-  </div>
-  <div class="container container2">
-    <ul v-if="getListOfTodos.length > 0">
-      <li v-for="todo in getListOfTodos" :key="todo.id">
-        <p>{{ todo.id }} - {{ todo.title }} - {{ todo.completed }}</p>
-        <button id="complete" type="button" @click="setCompletion(todo.id)">Complete</button>
-        <button id="delete" type="button" @click="deleteTodo(todo.id)">Delete</button>
-      </li>
-    </ul>
-    <p v-else>No todos on the list</p>
+  <div class="main-wrapper">
+    <div class="container container1">
+      <input type="text" name="search" id="search" @input="setFilter" v-model="filterBy" />
+      <select name="sort" id="sort" @change="setSorting" v-model="selectedOption">
+        <option value="alpha">Alphabeticaly</option>
+        <option value="id">By Id</option>
+      </select>
+      <button id="new" @click="pushToAddTodo">Add new todo</button>
+    </div>
+    <div class="container container2">
+      <ul v-if="getListOfTodos.length > 0">
+        <li v-for="todo in getListOfTodos" :key="todo.id">
+          <p>{{ todo.id }} - {{ todo.title }} - {{ todo.completed }}</p>
+          <button id="complete" type="button" @click="setCompletion(todo.id)">Complete</button>
+          <button id="delete" type="button" @click="deleteTodo(todo.id)">Delete</button>
+        </li>
+      </ul>
+      <p v-else>No todos on the list</p>
+    </div>
   </div>
 </template>
 
@@ -70,6 +72,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.main-wrapper {
+  flex: 4;
+  background-color: lightblue;
+}
 .container {
   width: 50%;
   margin: 20px auto;
