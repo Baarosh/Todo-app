@@ -1,12 +1,12 @@
 <template>
   <div class="header-wrapper">
-    <div class="container-left" @click="pushToMain">
-      <font-awesome-icon :icon="['fas', 'book']" size="2x" color="rgb(139, 79, 55)" />
-      <h1>Your Task Manager</h1>
+    <div class="header-img">
+      <img src="../assets/croppedLogo.png" alt="logo" />
     </div>
-    <div class="container-right">
-      <h2>Sign out</h2>
-    </div>
+    <div class="header-title" @click="pushToMain">To-Do...</div>
+    <div class="header-empty"></div>
+    <div class="header-user">nlipinski@google.com</div>
+    <div class="header-signout">Sign Out</div>
   </div>
 </template>
 
@@ -21,49 +21,43 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header-wrapper {
-  height: 50px;
-  width: 100%;
-  display: flex;
-  background-color: lightsalmon;
-  align-items: center;
-  justify-content: space-between;
+@import '../assets/variables.scss';
 
-  .container-left {
-    margin-left: 15px;
-    height: 100%;
-    width: 320px;
+.header-wrapper {
+  font-weight: bold;
+  background-color: $header-background;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 60px 2fr 4fr 2fr 1fr;
+  height: 45px;
+
+  .header-img {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    h1 {
-      font-size: 2rem;
-      color: black;
+    justify-content: center;
+    img {
+      width: 40px;
+      height: 40px;
     }
   }
 
-  .container-right {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    h2 {
-      font-size: 1.7rem;
-      color: white;
-      margin-right: 20px;
-      background-color: rgb(139, 79, 55);
-      border-radius: 15px;
-      padding: 5px 15px;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
+  .header-title {
+    font-family: 'Old Standard TT', serif;
+    font-size: 25px;
+    color: $header-title-color;
+    margin: auto 0;
+  }
+  .header-empty {
+  }
+  .header-user {
+    margin: auto;
+  }
+  .header-signout {
+    margin: auto;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 25px;
+    background-color: $header-signout-background;
   }
 }
 </style>

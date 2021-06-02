@@ -93,55 +93,18 @@ export default {
 
 <style lang="scss" scoped>
 .main-wrapper {
-  flex: 4;
-  background-color: lightblue;
 }
 
 .list-header {
-  width: 50%;
-  margin: 20px auto;
-  background-color: plum;
-  border-radius: 10px;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 10px;
   h3 {
-    padding: 0;
-    margin: 0;
   }
 }
 
 .list-content {
-  width: 50%;
-  margin: 20px auto;
-  background-color: plum;
-  border-radius: 10px;
-
   ul {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: flex-start;
-    justify-content: center;
-    list-style: none;
-    margin: 0;
-    padding: 0 10px;
     li {
-      width: 100%;
-      display: grid;
-      grid-template-columns: 3fr 1fr 1fr;
-
       button {
-        padding: 0px;
-        width: 100px;
-        height: auto;
-        border: none;
-        background-color: lightgreen;
-        border-radius: 5px;
         &:hover {
-          background-color: green;
-          cursor: pointer;
         }
       }
     }
@@ -149,6 +112,5 @@ export default {
 }
 
 .checked {
-  text-decoration: line-through;
 }
 </style>
