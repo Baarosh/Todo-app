@@ -20,10 +20,17 @@
           <p :class="{ checked: !todo.completed }">
             {{ todo.id }} - {{ todo.title }} - {{ todo.completed }}
           </p>
-          <button id="complete-button" type="button" @click="setCompletion(todo.id)">
+          <button
+            class="btn-primary"
+            id="complete-button"
+            type="button"
+            @click="setCompletion(todo.id)"
+          >
             Complete
           </button>
-          <button id="delete-button" type="button" @click="deleteTodo(todo.id)">Delete</button>
+          <button class="btn-danger" id="delete-button" type="button" @click="deleteTodo(todo.id)">
+            Delete
+          </button>
         </li>
       </ul>
       <ul v-else>
@@ -31,7 +38,7 @@
           <p>No todos on the list</p>
         </li>
       </ul>
-      <button id="new-todo-button" @click="pushToAddTodo">Add Task</button>
+      <button class="btn-success" id="new-todo-button" @click="pushToAddTodo">Add Task</button>
     </div>
   </div>
 </template>
@@ -93,10 +100,17 @@ export default {
 
 <style lang="scss" scoped>
 .main-wrapper {
+  width: 80%;
+  margin: 0 auto;
 }
 
 .list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
   h3 {
+    font-size: 22px;
+    font-weight: bold;
   }
 }
 

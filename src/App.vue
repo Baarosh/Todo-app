@@ -1,23 +1,23 @@
 <template>
   <the-header></the-header>
-  <!-- <section>
+  <section>
     <the-navigation></the-navigation>
     <router-view v-slot="{ Component }">
       <keep-alive>
         <component :is="Component" />
       </keep-alive>
     </router-view>
-  </section> -->
+  </section>
 </template>
 
 <script>
 import TheHeader from './components/TheHeader.vue';
-// import TheNavigation from './components/TheNavigation.vue';
+import TheNavigation from './components/TheNavigation.vue';
 
 export default {
   components: {
     TheHeader,
-    // TheNavigation,
+    TheNavigation,
   },
 };
 </script>
@@ -29,5 +29,12 @@ export default {
 
 body {
   background-color: $body-background;
+}
+
+section {
+  display: grid;
+  height: calc(100vh - 45px);
+  grid-template-rows: 1fr;
+  grid-template-columns: 20% 80%;
 }
 </style>

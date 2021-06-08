@@ -7,7 +7,7 @@
       <option value="Work">Work</option>
       <option value="Other">Other</option>
     </select>
-    <button id="add" @click="addNewTodo">Add todo</button>
+    <button class="btn-success" id="add" @click="addNewTodo">Add todo</button>
   </div>
 </template>
 
@@ -35,6 +35,11 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  width: 80%;
+  margin: 10px auto;
   ul {
     p {
     }
